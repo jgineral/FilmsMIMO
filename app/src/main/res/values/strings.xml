@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">InfoMovie</string>
+    <string name="error">Ups! un error</string>
+    <string name="Home">home</string>
+    <string name="Favoritos">favoritos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="response_title">Respuesta</string>
+</resources>
