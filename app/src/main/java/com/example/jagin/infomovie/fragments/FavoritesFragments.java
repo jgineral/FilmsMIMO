@@ -3,18 +3,19 @@ package com.example.jagin.infomovie.fragments;
 import android.app.Fragment;
 import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.jagin.infomovie.BuildConfig;
 import com.example.jagin.infomovie.R;
+import com.example.jagin.infomovie.adapter.PeliculaAdapter;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;
 import com.example.jagin.infomovie.model.Pelicula;
 
@@ -24,8 +25,9 @@ import java.util.List;
 public class FavoritesFragments extends Fragment {
     private static FavoritesPeliculasDatabase db;
     private static List<Pelicula> favoritePeliculas;
-    private static String favorita;
-    private static TextView texto;
+    private static RecyclerView rvFavoritos;
+    private static PeliculaAdapter adapter;
+    private static Context contexto;
 
     public static FavoritesFragments newInstance(){
         return new FavoritesFragments();
@@ -41,9 +43,9 @@ public class FavoritesFragments extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        texto = getView().findViewById(R.id.tv_fragmentFavoritos);
+        rvFavoritos = getView().findViewById(R.id.rv_favoritos);
+        contexto = getActivity();
         getFavoritePeliculas();
-        favorita = "";
     }
 
     private void getFavoritePeliculas(){
@@ -63,11 +65,10 @@ public class FavoritesFragments extends Fragment {
         protected void onPostExecute(List<Pelicula> peliculas) {
             super.onPostExecute(peliculas);
             favoritePeliculas = peliculas;
-            for (int i = 0; i < favoritePeliculas.size(); i++) {
-                favorita = favorita + ", " + favoritePeliculas.get(i).title;
-
-            }
-            texto.setText(favorita);
+            rvFavoritos.setLayoutManager((new LinearLayoutManager(contexto)));
+            adapter = new PeliculaAdapter();
+            adapter.setData(favoritePeliculas);
+            rvFavoritos.setAdapter(adapter);
         }
     }
 }

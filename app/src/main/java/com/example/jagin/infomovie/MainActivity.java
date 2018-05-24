@@ -1,8 +1,6 @@
 package com.example.jagin.infomovie;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
@@ -20,15 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final PeliculasFragments peliculasFragments = new PeliculasFragments();
-
-        if(getFragmentManager()!=null) {
-            getFragmentManager().beginTransaction().add(R.id.fl_Contenedor, peliculasFragments).commit();
-        }
-
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(myOnNavigationItemSelectedListener);
-        navigationView.setSelectedItemId(R.id.tv_fragmentPeliculas);
+        navigationView.setSelectedItemId(R.id.navigation_home);
 
     }
 
@@ -55,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fl_Contenedor, fragmentClicked);
+        //fragmentTransaction.addToBackStack("lista"); //Guardar el fragments
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
 

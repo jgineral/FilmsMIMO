@@ -5,10 +5,11 @@
     tools:context="com.example.jagin.infomovie.fragments.PeliculasFragments">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_fragmentPeliculas"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_Peliculas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="peliculas fragments" />
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

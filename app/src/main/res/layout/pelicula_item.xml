@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardBackgroundColor="@android:color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/peliculas_values"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@android:color/black"
+                tools:text="Pelicula Title"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"/>
+
+            <TextView
+                android:id="@+id/tvVote_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                tools:text="9'5"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:id="@+id/tvFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="14dp"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/darker_gray"
+                tools:text="7/2/2018"
+                />
+            <TextView
+                android:id="@+id/tvIdioma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="11dp"
+                android:layout_below="@+id/tvFecha"
+                android:textColor="@android:color/darker_gray"
+                tools:text="Español"
+                />
+            <TextView
+                android:id="@+id/tvAdulto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textSize="11dp"
+                android:layout_marginLeft="6dp"
+                android:layout_below="@+id/tvFecha"
+                android:textColor="@android:color/darker_gray"
+                tools:text="Edad: +18"
+                android:layout_toRightOf="@+id/tvIdioma"
+                />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivPelicula"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:layout_above="@+id/peliculas_values"
+            tools:src="@mipmap/ic_launcher"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+
+

@@ -5,16 +5,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.jagin.infomovie.BuildConfig;
 import com.example.jagin.infomovie.R;
 
+import com.example.jagin.infomovie.adapter.PeliculaAdapter;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;
 import com.example.jagin.infomovie.model.Pelicula;
 import com.example.jagin.infomovie.model.Results;
@@ -29,7 +31,9 @@ public class PeliculasFragments extends Fragment {
     private static FavoritesPeliculasDatabase db;
     public static List<Pelicula> favoritePeliculas;
     public static List<Pelicula> peliculasList;
-    private static TextView texto;
+
+    private RecyclerView rvPeliculas;
+    private PeliculaAdapter adapter;
 
     public static PeliculasFragments newInstance(){
         return new PeliculasFragments();
@@ -46,7 +50,7 @@ public class PeliculasFragments extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(getView() != null){
-            texto = getView().findViewById(R.id.tv_fragmentPeliculas);
+            rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
             getPeliculas();
 
         }
@@ -61,7 +65,12 @@ public class PeliculasFragments extends Fragment {
                 if(peliculas != null){
                     peliculasList = peliculas.getPeliculas();
                 }
-                texto.setText(String.format("%s\n\n%s", getString(R.string.response_title), peliculas.toString()));
+                //texto.setText(String.format("%s\n\n%s", getString(R.string.response_title), peliculas.toString()));
+                rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
+                adapter = new PeliculaAdapter();
+                adapter.setData(peliculasList);
+                rvPeliculas.setAdapter(adapter);
+
 
                 //addToFavorites(6);
             }
@@ -69,7 +78,7 @@ public class PeliculasFragments extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                texto.setText(R.string.error);
+
 
             }
         });
