@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.jagin.infomovie.BuildConfig;
+import com.example.jagin.infomovie.MainActivity;
 import com.example.jagin.infomovie.R;
 
 import com.example.jagin.infomovie.adapter.PeliculaAdapter;
@@ -35,8 +37,6 @@ public class PeliculasFragments extends Fragment {
 
     private static RecyclerView rvPeliculas;
     private static PeliculaAdapter adapter;
-    private static Activity activity;
-
     public static PeliculasFragments newInstance(){
         return new PeliculasFragments();
 
@@ -53,22 +53,23 @@ public class PeliculasFragments extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if(getView() != null){
             rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
-
+            rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
+            adapter = new PeliculaAdapter();
             getPeliculas();
 
         }
 
     }
-
+    //Obtenemos las Peliculas
     private void getPeliculas(){
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.URL, Results.class, null, new Response.Listener<Results>() {
 
             @Override
             public void onResponse(Results peliculas) {
-                activity = getActivity();
                 if(peliculas != null){
                     peliculasList = peliculas.getPeliculas();
                     for (int i = 0; i < peliculasList.size(); i++) {
+                        //Comprobamos si hay alguna favorita para cambiar la favoritos en el recycler
                         getFavoritePeliculaById(i);
                     }
                 }
@@ -78,7 +79,6 @@ public class PeliculasFragments extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
 
             }
         });
@@ -107,28 +107,15 @@ public class PeliculasFragments extends Fragment {
             Snackbar.make(getView(),"Film added to favorites",Snackbar.LENGTH_LONG).show();
         }
     }
-
-    ///////////////////////
-
     private void getFavoritePeliculaById(int index){
         Pelicula pelicula = peliculasList.get(index);
         db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
         PeliculasFragments.GetIdTask getIdTask = new PeliculasFragments.GetIdTask();
         //Comprobamos si hay cambios en la base de datos, y si es así pintamos.
         getIdTask.execute(pelicula.getId());
-
-
-
     }
 
-    private static class GetIdTask extends AsyncTask<Integer, Void, Pelicula> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            Pelicula peliculaEncontrada;
-        }
-
+    private class GetIdTask extends AsyncTask<Integer, Void, Pelicula> {
         @Override
         protected Pelicula doInBackground(Integer... integers) {
             return db.favoritesPeliculasDao().findPelilculaWithId(integers[0]);
@@ -138,6 +125,7 @@ public class PeliculasFragments extends Fragment {
         @Override
         protected void onPostExecute(Pelicula pelicula) {
             super.onPostExecute(pelicula);
+
             if(pelicula != null) {
                 Log.i("peliculaDao",pelicula.toString());
                 for (int i = 0; i < peliculasList.size() ; i++) {
@@ -148,13 +136,13 @@ public class PeliculasFragments extends Fragment {
             }
             /*Como existe la posibilidad de que encuentre un favoritos en la base de datos, debemos de pintar que esta favorito.
             por tanto pintar aquí. */
-
-            rvPeliculas.setLayoutManager(new LinearLayoutManager(activity));
-            adapter = new PeliculaAdapter();
-            Log.i("peliculas 2", peliculasList.get(1).toString());
             adapter.setData(peliculasList);
             rvPeliculas.setAdapter(adapter);
+
         }
 
     }
+
+
+
 }

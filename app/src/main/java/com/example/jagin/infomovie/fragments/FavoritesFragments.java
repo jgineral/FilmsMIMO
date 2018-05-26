@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,8 +45,16 @@ public class FavoritesFragments extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         rvFavoritos = getView().findViewById(R.id.rv_favoritos);
-        contexto = getActivity();
+        rvFavoritos.setLayoutManager((new LinearLayoutManager(getActivity())));
+        adapter = new PeliculaAdapter();
+
         getFavoritePeliculas();
+    }
+
+    private void deleteFavoritePelicula(int index){
+        db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
+        DeleteFavoriteTask deleteFavoriteTask = new DeleteFavoriteTask(index);
+        deleteFavoriteTask.execute();
     }
 
     private void getFavoritePeliculas(){
@@ -65,10 +74,34 @@ public class FavoritesFragments extends Fragment {
         protected void onPostExecute(List<Pelicula> peliculas) {
             super.onPostExecute(peliculas);
             favoritePeliculas = peliculas;
-            rvFavoritos.setLayoutManager((new LinearLayoutManager(contexto)));
-            adapter = new PeliculaAdapter();
             adapter.setData(favoritePeliculas);
             rvFavoritos.setAdapter(adapter);
         }
     }
+
+    private class DeleteFavoriteTask extends AsyncTask<Pelicula,Void,Void>{
+
+        int positionRemoved;
+
+        public DeleteFavoriteTask(int positionRemoved){
+            this.positionRemoved = positionRemoved;
+        }
+
+        @Override
+        protected Void doInBackground(Pelicula... peliculas) {
+            db.favoritesPeliculasDao().delete(peliculas[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapter.notifyItemRemoved(positionRemoved);
+            //Volvemos a pintar lista Favoritos.
+            GetFavoritesTask getFavoritesTask = new GetFavoritesTask();
+            getFavoritesTask.execute();
+            Snackbar.make(getView(),"Film deleted to favorites",Snackbar.LENGTH_LONG).show();
+        }
+    }
+
 }

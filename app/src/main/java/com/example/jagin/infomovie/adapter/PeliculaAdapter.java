@@ -50,10 +50,10 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
             holder.tvAdulto.setText("");
         }
         if(pelicula.isFavorite()){
-            holder.tvFavorite.setText(R.string.favorito);
+            holder.ivFavorite.setImageResource(R.drawable.ic_star);
         }
         else {
-            holder.tvFavorite.setText(R.string.no_favorite);
+            holder.ivFavorite.setImageResource(R.drawable.ic_star_border);
         }
 
         imagen = BuildConfig.URL_IMG + pelicula.getPoster_path();
@@ -81,7 +81,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         TextView tvIdioma;
         TextView tvAdulto;
         TextView tvOverview;
-        TextView tvFavorite;
+        ImageView ivFavorite;
         ImageView ivPelicula;
 
         public Holder(View itemView) {
@@ -93,7 +93,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
             tvAdulto = itemView.findViewById(R.id.tvAdulto);
             ivPelicula = itemView.findViewById(R.id.ivPelicula);
             tvOverview = itemView.findViewById(R.id.tvOverview);
-            tvFavorite = itemView.findViewById(R.id.tvFavorite);
+            ivFavorite = itemView.findViewById(R.id.ivFavorite);
         }
     }
 }

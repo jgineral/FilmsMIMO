@@ -80,8 +80,8 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="11dp"
                 tools:text="Edad: +18" />
-            <TextView
-                android:id="@+id/tvFavorite"
+            <ImageView
+                android:id="@+id/ivFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvFecha"
