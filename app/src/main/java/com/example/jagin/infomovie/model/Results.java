@@ -14,10 +14,6 @@ public class Results {
         return peliculas;
     }
 
-    public void setPeliculas(List<Pelicula> peliculas){
-        this.peliculas = peliculas;
-    }
-
     @Override
     public String toString() {
         StringBuilder description = new StringBuilder();

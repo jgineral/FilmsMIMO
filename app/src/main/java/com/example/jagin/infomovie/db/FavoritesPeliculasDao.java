@@ -17,11 +17,7 @@ public interface FavoritesPeliculasDao {
     List<Pelicula> getAll();
 
     @Query("SELECT * FROM Pelicula WHERE id = :id")
-    Pelicula loadPeliculaById(int id);
-
-    @Query("SELECT * FROM Pelicula WhERE title = :title")
-     Pelicula loadPeliculaByTitle(String title);
-
+    Pelicula findPelilculaWithId(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pelicula pelicula);

@@ -8,4 +8,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="response_title">Respuesta</string>
     <string name="adulto_true">Edad: +18</string>
+    <string name="favorito">Favorito</string>
+    <string name="no_favorite">No favorito</string>
 </resources>

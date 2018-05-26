@@ -1,5 +1,6 @@
 package com.example.jagin.infomovie.model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
@@ -12,27 +13,29 @@ public class Pelicula implements Parcelable {
 
     @SerializedName("id")
     @PrimaryKey
-    public int id;
+    private int id;
 
     @SerializedName("vote_average")
-    public double vote_average;
+    private double vote_average;
 
     @SerializedName("title")
-    public String title;
+    private String title;
     @SerializedName("poster_path")
-    public String poster_path;
+    private String poster_path;
 
     @SerializedName("original_language")
-    public String original_language;
+    private String original_language;
 
     @SerializedName("adult")
-    public boolean adult;
+    private boolean adult;
 
     @SerializedName("overview")
-    public String overview;
+    private String overview;
 
     @SerializedName("release_date")
-    public String release_date;
+    private String release_date;
+
+    private boolean favorite;
 
     @Override
     public String toString() {
@@ -45,10 +48,11 @@ public class Pelicula implements Parcelable {
                 ", adult=" + adult +
                 ", overview='" + overview + '\'' +
                 ", release_date='" + release_date + '\'' +
+                ", favorite=" + favorite +
                 '}';
     }
 
-    public Pelicula(int id, double vote_average, String title, String poster_path, String original_language, boolean adult, String overview, String release_date) {
+    public Pelicula(int id, double vote_average, String title, String poster_path, String original_language, boolean adult, String overview, String release_date, boolean favorite) {
         this.id = id;
         this.vote_average = vote_average;
         this.title = title;
@@ -57,6 +61,15 @@ public class Pelicula implements Parcelable {
         this.adult = adult;
         this.overview = overview;
         this.release_date = release_date;
+        this.favorite = favorite;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     public int getId() {

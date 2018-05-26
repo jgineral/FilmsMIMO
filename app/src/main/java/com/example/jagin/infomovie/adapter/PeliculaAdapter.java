@@ -2,6 +2,7 @@ package com.example.jagin.infomovie.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,11 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         final Pelicula pelicula = peliculaList.get(position);
+        Log.i("peliculas3", peliculaList.get(position).toString());
         holder.tvTitle.setText(pelicula.getTitle());
         holder.tvFecha.setText(pelicula.getRelease_date());
         holder.tvIdioma.setText(pelicula.getOriginal_language());
+        holder.tvOverview.setText(pelicula.getOverview());
         media_votos = Double.toString(pelicula.getVote_average());
         holder.tvVote_average.setText(media_votos);
         if(pelicula.isAdult()){
@@ -46,6 +49,13 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         }else{
             holder.tvAdulto.setText("");
         }
+        if(pelicula.isFavorite()){
+            holder.tvFavorite.setText(R.string.favorito);
+        }
+        else {
+            holder.tvFavorite.setText(R.string.no_favorite);
+        }
+
         imagen = BuildConfig.URL_IMG + pelicula.getPoster_path();
         if(pelicula.getPoster_path() != null){
             Picasso.with(holder.ivPelicula.getContext()).load(imagen).into(holder.ivPelicula);
@@ -70,6 +80,8 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         TextView tvFecha;
         TextView tvIdioma;
         TextView tvAdulto;
+        TextView tvOverview;
+        TextView tvFavorite;
         ImageView ivPelicula;
 
         public Holder(View itemView) {
@@ -80,6 +92,8 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
             tvIdioma = itemView.findViewById(R.id.tvIdioma);
             tvAdulto = itemView.findViewById(R.id.tvAdulto);
             ivPelicula = itemView.findViewById(R.id.ivPelicula);
+            tvOverview = itemView.findViewById(R.id.tvOverview);
+            tvFavorite = itemView.findViewById(R.id.tvFavorite);
         }
     }
 }
