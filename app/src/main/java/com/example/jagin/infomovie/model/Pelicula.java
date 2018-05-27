@@ -1,6 +1,5 @@
 package com.example.jagin.infomovie.model;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
@@ -35,6 +34,9 @@ public class Pelicula implements Parcelable {
     @SerializedName("release_date")
     private String release_date;
 
+    @SerializedName("backdrop_path")
+    private String backdrop_path;
+
     private boolean favorite;
 
     @Override
@@ -48,11 +50,12 @@ public class Pelicula implements Parcelable {
                 ", adult=" + adult +
                 ", overview='" + overview + '\'' +
                 ", release_date='" + release_date + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
                 ", favorite=" + favorite +
                 '}';
     }
 
-    public Pelicula(int id, double vote_average, String title, String poster_path, String original_language, boolean adult, String overview, String release_date, boolean favorite) {
+    public Pelicula(int id, double vote_average, String title, String poster_path, String original_language, boolean adult, String overview, String release_date, String backdrop_path, boolean favorite) {
         this.id = id;
         this.vote_average = vote_average;
         this.title = title;
@@ -61,7 +64,16 @@ public class Pelicula implements Parcelable {
         this.adult = adult;
         this.overview = overview;
         this.release_date = release_date;
+        this.backdrop_path = backdrop_path;
         this.favorite = favorite;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 
     public boolean isFavorite() {
@@ -120,6 +132,8 @@ public class Pelicula implements Parcelable {
         dest.writeByte(this.adult ? (byte) 1 : (byte) 0);
         dest.writeString(this.overview);
         dest.writeString(this.release_date);
+        dest.writeString(this.backdrop_path);
+        dest.writeByte(this.favorite ? (byte) 1 : (byte) 0);
     }
 
     protected Pelicula(Parcel in) {
@@ -131,9 +145,11 @@ public class Pelicula implements Parcelable {
         this.adult = in.readByte() != 0;
         this.overview = in.readString();
         this.release_date = in.readString();
+        this.backdrop_path = in.readString();
+        this.favorite = in.readByte() != 0;
     }
 
-    public static final Creator<Pelicula> CREATOR = new Creator<Pelicula>() {
+    public static final Parcelable.Creator<Pelicula> CREATOR = new Parcelable.Creator<Pelicula>() {
         @Override
         public Pelicula createFromParcel(Parcel source) {
             return new Pelicula(source);

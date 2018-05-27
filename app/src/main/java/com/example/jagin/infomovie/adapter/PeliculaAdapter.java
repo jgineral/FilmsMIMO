@@ -17,20 +17,26 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder>{
+public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder> implements View.OnClickListener{
     private List<Pelicula> peliculaList;
     private String media_votos;
     private String imagen;
+    private View.OnClickListener listener;
 
 
     public void setData(List<Pelicula> peliculas){
         this.peliculaList = peliculas;
     }
 
+    public void setListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pelicula_item, parent, false);
+        view.setOnClickListener(this);
         return new Holder(view);
     }
 
@@ -71,6 +77,13 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
             itemCount = peliculaList.size();
         }
         return itemCount;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(listener!=null){
+            listener.onClick(v);
+        }
     }
 
     static class Holder extends RecyclerView.ViewHolder

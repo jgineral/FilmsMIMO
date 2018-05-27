@@ -2,6 +2,7 @@ package com.example.jagin.infomovie.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,6 +22,7 @@ import com.example.jagin.infomovie.BuildConfig;
 import com.example.jagin.infomovie.MainActivity;
 import com.example.jagin.infomovie.R;
 
+import com.example.jagin.infomovie.activities.PeliculaActivity;
 import com.example.jagin.infomovie.adapter.PeliculaAdapter;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;
 import com.example.jagin.infomovie.model.Pelicula;
@@ -55,6 +58,7 @@ public class PeliculasFragments extends Fragment {
             rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
             rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
             adapter = new PeliculaAdapter();
+
             getPeliculas();
 
         }
@@ -73,7 +77,7 @@ public class PeliculasFragments extends Fragment {
                         getFavoritePeliculaById(i);
                     }
                 }
-                //addToFavorites(0);
+                //addToFavorites(5);
             }
         }, new Response.ErrorListener() {
 
@@ -127,7 +131,6 @@ public class PeliculasFragments extends Fragment {
             super.onPostExecute(pelicula);
 
             if(pelicula != null) {
-                Log.i("peliculaDao",pelicula.toString());
                 for (int i = 0; i < peliculasList.size() ; i++) {
                     if(peliculasList.get(i).getId() == pelicula.getId()){
                         peliculasList.get(i).setFavorite(true);
@@ -137,12 +140,29 @@ public class PeliculasFragments extends Fragment {
             /*Como existe la posibilidad de que encuentre un favoritos en la base de datos, debemos de pintar que esta favorito.
             por tanto pintar aquí. */
             adapter.setData(peliculasList);
+            adapter.setListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    detail(rvPeliculas.getChildAdapterPosition(v));
+                }
+            });
             rvPeliculas.setAdapter(adapter);
 
         }
 
     }
 
+    private void detail(int position) {
+        Pelicula pelicula;
+        pelicula = peliculasList.get(position);
+        Toast.makeText(getActivity(), pelicula.getTitle(), Toast.LENGTH_LONG).show();
+
+        Intent myIntent = new Intent();
+        myIntent.setClass(getActivity(), PeliculaActivity.class);
+        myIntent.putExtra("pelicula", pelicula);
+
+        startActivity(myIntent);
+    }
 
 
 }

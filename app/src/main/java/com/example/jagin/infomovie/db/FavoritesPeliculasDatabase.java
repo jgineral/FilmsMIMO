@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import com.example.jagin.infomovie.model.Pelicula;
 
 
-@Database(entities = {Pelicula.class}, version = 3, exportSchema = false)
+@Database(entities = {Pelicula.class}, version = 4, exportSchema = false)
 public abstract class FavoritesPeliculasDatabase extends RoomDatabase{
     public abstract FavoritesPeliculasDao favoritesPeliculasDao();
 

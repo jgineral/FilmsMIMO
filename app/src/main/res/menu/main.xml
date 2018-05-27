@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_info"
+        android:title="@string/info"
+        app:title="Information"
+        android:icon="@android:drawable/ic_dialog_info"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_music"
+        android:title="@string/music"
+        app:title="Music"
+        android:icon="@android:drawable/ic_media_play"
+        app:showAsAction="never"/>
+</menu>
