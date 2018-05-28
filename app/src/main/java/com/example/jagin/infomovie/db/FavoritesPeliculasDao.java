@@ -19,6 +19,9 @@ public interface FavoritesPeliculasDao {
     @Query("SELECT * FROM Pelicula WHERE id = :id")
     Pelicula findPelilculaWithId(int id);
 
+    @Query("SELECT COUNT(*) FROM Pelicula")
+    int countPelilculas();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pelicula pelicula);
 

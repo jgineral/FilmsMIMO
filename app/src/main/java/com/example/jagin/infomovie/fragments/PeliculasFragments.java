@@ -1,10 +1,13 @@
 package com.example.jagin.infomovie.fragments;
 import android.app.Fragment;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,18 +45,36 @@ public class PeliculasFragments extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_peliculas_fragments, container, false);
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if(getView() != null){
+            //Comparar los id. para ver si isFavorite
+
             rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
             rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
             adapter = new PeliculaAdapter();
 
             getPeliculas();
 
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        //getPeliculas();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(db != null){
+            db.close();
         }
 
     }
@@ -69,7 +90,9 @@ public class PeliculasFragments extends Fragment {
                     for (int i = 0; i < peliculasList.size(); i++) {
                         //Comprobamos si hay alguna favorita para cambiar la favoritos en el recycler
                         getFavoritePeliculaById(i);
+
                     }
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -80,6 +103,7 @@ public class PeliculasFragments extends Fragment {
             }
         });
         RequestManager.getInstance().addRequest(getActivity(), gsonRequest);
+
     }
 
     private void getFavoritePeliculaById(int index){

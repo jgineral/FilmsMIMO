@@ -5,6 +5,16 @@
     tools:context="com.example.jagin.infomovie.fragments.FavoritesFragments">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tvInfoList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_favoritos"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_favoritos"
         android:layout_width="match_parent"

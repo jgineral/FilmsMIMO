@@ -19,4 +19,9 @@ public class InsertFavoriteTask extends AsyncTask<Pelicula, Void, Void> {
         db.favoritesPeliculasDao().insert(peliculas[0]);
         return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+    }
 }

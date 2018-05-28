@@ -44,7 +44,7 @@ public class GetIdTask extends AsyncTask<Integer, Void, Pelicula> {
         por tanto pintar aquí. */
         adapter.setData(peliculaList);
         rvPeliculas.setAdapter(adapter);
-
+        db.close();
     }
 
 }

@@ -57,16 +57,18 @@ public class DetalleFragments extends Fragment {
         init(pelicula);
     }
 
+
     @Override
     public void onDestroy() {
+        //Add o delete en onDestroy por si el usuario clickea redundantemente en el icono de favoritos.
         if(favorite){
             addToFavorites(pelicula);
-            Log.i("Added finalmente",pelicula.getTitle());
         }
         else{
             deleteToFavorites(pelicula);
             Log.i("Deleted finalmente",pelicula.getTitle());
         }
+
         super.onDestroy();
     }
 
@@ -75,7 +77,7 @@ public class DetalleFragments extends Fragment {
     private void addToFavorites(Pelicula pelicula){
         db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
         InsertFavoriteTask insertFavoriteTask = new InsertFavoriteTask(db);
-        pelicula.setFavorite(true); //introducimos la pelicula como favorita (true).
+        pelicula.setFavorite(true); //introducimos la pelicula como favorita (true)
         insertFavoriteTask.execute(pelicula);
     }
 

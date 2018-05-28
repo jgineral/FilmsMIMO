@@ -33,5 +33,6 @@ public class GetFavoritesTask extends AsyncTask<Void, Integer, List<Pelicula>> {
         favoritePeliculas = peliculas;
         adapter.setData(favoritePeliculas);
         rvFavoritos.setAdapter(adapter);
+        db.close();
     }
 }

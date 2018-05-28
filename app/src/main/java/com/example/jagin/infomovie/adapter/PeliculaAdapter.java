@@ -43,7 +43,6 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         final Pelicula pelicula = peliculaList.get(position);
-        Log.i("peliculas3", peliculaList.get(position).toString());
         holder.tvTitle.setText(pelicula.getTitle());
         holder.tvFecha.setText(pelicula.getRelease_date());
         holder.tvIdioma.setText(pelicula.getOriginal_language());
