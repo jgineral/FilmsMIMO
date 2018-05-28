@@ -1,29 +1,22 @@
 package com.example.jagin.infomovie.fragments;
-import android.app.Activity;
 import android.app.Fragment;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.jagin.infomovie.BuildConfig;
-import com.example.jagin.infomovie.MainActivity;
-import com.example.jagin.infomovie.R;
 
+import com.example.jagin.infomovie.BuildConfig;
+import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.activities.PeliculaActivity;
 import com.example.jagin.infomovie.adapter.PeliculaAdapter;
+import com.example.jagin.infomovie.asyncTask.GetIdTask;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;
 import com.example.jagin.infomovie.model.Pelicula;
 import com.example.jagin.infomovie.model.Results;
@@ -64,6 +57,7 @@ public class PeliculasFragments extends Fragment {
         }
 
     }
+
     //Obtenemos las Peliculas
     private void getPeliculas(){
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.URL, Results.class, null, new Response.Listener<Results>() {
@@ -77,7 +71,6 @@ public class PeliculasFragments extends Fragment {
                         getFavoritePeliculaById(i);
                     }
                 }
-                //addToFavorites(5);
             }
         }, new Response.ErrorListener() {
 
@@ -89,67 +82,17 @@ public class PeliculasFragments extends Fragment {
         RequestManager.getInstance().addRequest(getActivity(), gsonRequest);
     }
 
-    private void addToFavorites(int index){
-        Pelicula pelicula = peliculasList.get(index);
-        db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
-        InsertFavoriteTask insertFavoriteTask = new InsertFavoriteTask();
-        pelicula.setFavorite(true); //introducimos la pelicula como favorita (true).
-        insertFavoriteTask.execute(pelicula);
-    }
-
-    private class InsertFavoriteTask extends AsyncTask<Pelicula, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Pelicula... peliculas) {
-            db.favoritesPeliculasDao().insert(peliculas[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Snackbar.make(getView(),"Film added to favorites",Snackbar.LENGTH_LONG).show();
-        }
-    }
     private void getFavoritePeliculaById(int index){
         Pelicula pelicula = peliculasList.get(index);
         db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
-        PeliculasFragments.GetIdTask getIdTask = new PeliculasFragments.GetIdTask();
-        //Comprobamos si hay cambios en la base de datos, y si es así pintamos.
-        getIdTask.execute(pelicula.getId());
-    }
-
-    private class GetIdTask extends AsyncTask<Integer, Void, Pelicula> {
-        @Override
-        protected Pelicula doInBackground(Integer... integers) {
-            return db.favoritesPeliculasDao().findPelilculaWithId(integers[0]);
-
-        }
-
-        @Override
-        protected void onPostExecute(Pelicula pelicula) {
-            super.onPostExecute(pelicula);
-
-            if(pelicula != null) {
-                for (int i = 0; i < peliculasList.size() ; i++) {
-                    if(peliculasList.get(i).getId() == pelicula.getId()){
-                        peliculasList.get(i).setFavorite(true);
-                    }
-                }
+        adapter.setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detail(rvPeliculas.getChildAdapterPosition(v));
             }
-            /*Como existe la posibilidad de que encuentre un favoritos en la base de datos, debemos de pintar que esta favorito.
-            por tanto pintar aquí. */
-            adapter.setData(peliculasList);
-            adapter.setListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    detail(rvPeliculas.getChildAdapterPosition(v));
-                }
-            });
-            rvPeliculas.setAdapter(adapter);
-
-        }
-
+        });
+        GetIdTask getIdTask = new GetIdTask(db,peliculasList,adapter,rvPeliculas);
+        getIdTask.execute(pelicula.getId());
     }
 
     private void detail(int position) {
