@@ -2,7 +2,6 @@ package com.example.jagin.infomovie.asyncTask;
 
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.jagin.infomovie.adapter.PeliculaAdapter;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;

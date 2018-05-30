@@ -1,4 +1,5 @@
 package com.example.jagin.infomovie;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.support.annotation.NonNull;
@@ -9,23 +10,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.jagin.infomovie.fragments.FavoritesFragments;
 import com.example.jagin.infomovie.fragments.PeliculasFragments;
 
+
 public class MainActivity extends AppCompatActivity {
+
+    private  static Activity mActivity;
+
+
+    public  static Activity getmActivity() {
+        return mActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //startService(new Intent(MainActivity.this, MediaService.class));
+        mActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(myOnNavigationItemSelectedListener);
         navigationView.setSelectedItemId(R.id.navigation_home);
+
+
+
+
+
 
     }
 
@@ -37,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
+
 
     private void selectFragment(MenuItem item) {
         Fragment fragmentClicked = null;
@@ -59,8 +77,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        //stopService(new Intent(MainActivity.this, MediaService.class));
+        Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

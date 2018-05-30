@@ -19,17 +19,15 @@ import com.example.jagin.infomovie.adapter.PeliculaAdapter;
 import com.example.jagin.infomovie.asyncTask.CountTask;
 import com.example.jagin.infomovie.asyncTask.GetFavoritesTask;
 import com.example.jagin.infomovie.db.FavoritesPeliculasDatabase;
-import com.example.jagin.infomovie.model.Pelicula;
 
-import java.util.List;
+import java.util.Objects;
 
 
 public class FavoritesFragments extends Fragment {
     private static FavoritesPeliculasDatabase db;
-    private static List<Pelicula> favoritePeliculas;
-    private static RecyclerView rvFavoritos;
+    private  RecyclerView rvFavoritos;
     private static PeliculaAdapter adapter;
-    private static TextView tvNoFavorites;
+    private  TextView tvNoFavorites;
 
     public static FavoritesFragments newInstance(){
         return new FavoritesFragments();
@@ -45,15 +43,25 @@ public class FavoritesFragments extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        rvFavoritos = getView().findViewById(R.id.rv_favoritos);
+        rvFavoritos = Objects.requireNonNull(getView()).findViewById(R.id.rv_favoritos);
         tvNoFavorites = getView().findViewById(R.id.tvInfoList);
         rvFavoritos.setLayoutManager((new LinearLayoutManager(getActivity())));
         rvFavoritos.setItemAnimator(new DefaultItemAnimator());
         adapter = new PeliculaAdapter();
-
         getFavoritePeliculas();
         countFavoritesItems();
+    }
 
+    @Override
+    public void onResume() {
+        rvFavoritos = Objects.requireNonNull(getView()).findViewById(R.id.rv_favoritos);
+        tvNoFavorites = getView().findViewById(R.id.tvInfoList);
+        rvFavoritos.setLayoutManager((new LinearLayoutManager(getActivity())));
+        rvFavoritos.setItemAnimator(new DefaultItemAnimator());
+        adapter = new PeliculaAdapter();
+        getFavoritePeliculas();
+        countFavoritesItems();
+        super.onResume();
     }
 
     @Override
@@ -73,7 +81,7 @@ public class FavoritesFragments extends Fragment {
 
     private void getFavoritePeliculas(){
         db = Room.databaseBuilder(getActivity(), FavoritesPeliculasDatabase.class, BuildConfig.DB_NAME).build();
-        GetFavoritesTask getFavoritesTask = new GetFavoritesTask(db,favoritePeliculas,adapter,rvFavoritos);
+        GetFavoritesTask getFavoritesTask = new GetFavoritesTask(db,adapter,rvFavoritos,getActivity());
         getFavoritesTask.execute();
     }
 

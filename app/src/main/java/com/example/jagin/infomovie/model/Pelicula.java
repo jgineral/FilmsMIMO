@@ -72,10 +72,6 @@ public class Pelicula implements Parcelable {
         return backdrop_path;
     }
 
-    public void setBackdrop_path(String backdrop_path) {
-        this.backdrop_path = backdrop_path;
-    }
-
     public boolean isFavorite() {
         return favorite;
     }

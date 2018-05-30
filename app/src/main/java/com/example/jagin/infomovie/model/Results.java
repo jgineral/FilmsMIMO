@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Results {
     @SerializedName("results")
-    public List<Pelicula> peliculas = new ArrayList<>();
+    private List<Pelicula> peliculas = new ArrayList<>();
 
     public List<Pelicula> getPeliculas(){
         return peliculas;

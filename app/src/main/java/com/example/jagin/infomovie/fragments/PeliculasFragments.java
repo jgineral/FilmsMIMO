@@ -1,17 +1,13 @@
 package com.example.jagin.infomovie.fragments;
 import android.app.Fragment;
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -34,8 +30,9 @@ public class PeliculasFragments extends Fragment {
     private static FavoritesPeliculasDatabase db;
     public static List<Pelicula> peliculasList;
 
-    private static RecyclerView rvPeliculas;
+    private  RecyclerView rvPeliculas;
     private static PeliculaAdapter adapter;
+
     public static PeliculasFragments newInstance(){
         return new PeliculasFragments();
 
@@ -57,19 +54,11 @@ public class PeliculasFragments extends Fragment {
             rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
             rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
             adapter = new PeliculaAdapter();
-
             getPeliculas();
 
         }
 
     }
-
-    @Override
-    public void onResume() {
-        //getPeliculas();
-        super.onResume();
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -90,20 +79,16 @@ public class PeliculasFragments extends Fragment {
                     for (int i = 0; i < peliculasList.size(); i++) {
                         //Comprobamos si hay alguna favorita para cambiar la favoritos en el recycler
                         getFavoritePeliculaById(i);
-
                     }
-
                 }
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
 
             }
         });
         RequestManager.getInstance().addRequest(getActivity(), gsonRequest);
-
     }
 
     private void getFavoritePeliculaById(int index){
@@ -122,12 +107,9 @@ public class PeliculasFragments extends Fragment {
     private void detail(int position) {
         Pelicula pelicula;
         pelicula = peliculasList.get(position);
-        Toast.makeText(getActivity(), pelicula.getTitle(), Toast.LENGTH_LONG).show();
-
         Intent myIntent = new Intent();
         myIntent.setClass(getActivity(), PeliculaActivity.class);
         myIntent.putExtra("pelicula", pelicula);
-
         startActivity(myIntent);
     }
 

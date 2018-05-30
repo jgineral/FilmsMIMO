@@ -12,7 +12,7 @@ public class RequestManager {
     private  static RequestManager instance;
     private RequestQueue requestQueue;  //cola para nuestras peticiones.
 
-    public RequestManager(){
+    private RequestManager(){
 
     }
 
@@ -25,7 +25,7 @@ public class RequestManager {
     }
 
     //comprobar si existe y si no la crea.
-    public RequestQueue getRequestQueue(Context ctx){
+    private RequestQueue getRequestQueue(Context ctx){
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
         }

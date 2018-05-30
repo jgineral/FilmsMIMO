@@ -2,7 +2,6 @@ package com.example.jagin.infomovie.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,8 @@ import java.util.List;
 
 public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder> implements View.OnClickListener{
     private List<Pelicula> peliculaList;
-    private String media_votos;
-    private String imagen;
     private View.OnClickListener listener;
+
 
 
     public void setData(List<Pelicula> peliculas){
@@ -47,7 +45,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         holder.tvFecha.setText(pelicula.getRelease_date());
         holder.tvIdioma.setText(pelicula.getOriginal_language());
         holder.tvOverview.setText(pelicula.getOverview());
-        media_votos = Double.toString(pelicula.getVote_average());
+        String media_votos = Double.toString(pelicula.getVote_average());
         holder.tvVote_average.setText(media_votos);
         if(pelicula.isAdult()){
             holder.tvAdulto.setText(R.string.adulto_true);
@@ -61,7 +59,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
             holder.ivFavorite.setImageResource(R.drawable.ic_star_border);
         }
 
-        imagen = BuildConfig.URL_IMG + pelicula.getPoster_path();
+        String imagen = BuildConfig.URL_IMG + pelicula.getPoster_path();
         if(pelicula.getPoster_path() != null){
             Picasso.with(holder.ivPelicula.getContext()).load(imagen).into(holder.ivPelicula);
 
@@ -96,7 +94,7 @@ public class PeliculaAdapter extends RecyclerView.Adapter<PeliculaAdapter.Holder
         ImageView ivFavorite;
         ImageView ivPelicula;
 
-        public Holder(View itemView) {
+        private Holder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvVote_average = itemView.findViewById(R.id.tvVote_average);

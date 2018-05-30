@@ -22,6 +22,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <activity android:name=".activities.PeliculaActivity"></activity>
+
+        <service android:name=".servicios.MediaService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>
