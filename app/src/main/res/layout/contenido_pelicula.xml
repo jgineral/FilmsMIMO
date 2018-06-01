@@ -10,19 +10,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="MiMovies!"
-            app:subtitle="Movie"
-            android:elevation="4dp"
-            />
+            app:title="@string/app_name"
+            app:subtitle="@string/movie_subtitle"
+            style="@style/ToolbarStyle" />
 
         <FrameLayout
             android:id="@+id/fl_ContenedorDetalle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/navigation">
-
-        </FrameLayout>
+            android:layout_height="match_parent"/>
 
 </RelativeLayout>

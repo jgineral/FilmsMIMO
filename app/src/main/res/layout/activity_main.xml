@@ -7,27 +7,22 @@
     tools:context=".activities.MainActivity">
 
     <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="es.mimo.supportexamples.MainActivity">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        style="@style/ToolbarStyle" />
 
 
 
     <FrameLayout
         android:id="@+id/fl_Contenedor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/navigation">
+        android:layout_height="match_parent">
     </FrameLayout>
 
 
@@ -44,9 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        android:theme="@style/AppTheme"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation"
+        style="@style/BottonNavigationStyle" />
 
 
 </RelativeLayout>

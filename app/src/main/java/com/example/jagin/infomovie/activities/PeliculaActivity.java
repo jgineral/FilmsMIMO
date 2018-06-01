@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.fragments.DetalleFragments;
 
+import java.util.Objects;
+
 public class PeliculaActivity extends AppCompatActivity
 {
 
@@ -22,7 +24,7 @@ public class PeliculaActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
         Fragment fragment = DetalleFragments.newInstance();

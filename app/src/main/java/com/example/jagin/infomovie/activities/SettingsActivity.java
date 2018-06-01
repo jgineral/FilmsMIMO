@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.jagin.infomovie.R;
-import com.example.jagin.infomovie.fragments.InfoFragments;
 import com.example.jagin.infomovie.fragments.SettingsFragments;
+
+import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
         Fragment settingsFragments = SettingsFragments.newInstance();

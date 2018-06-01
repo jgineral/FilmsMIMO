@@ -24,6 +24,8 @@ import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.db.PreferencesManager;
 import com.example.jagin.infomovie.servicios.MediaService;
 
+import java.util.Objects;
+
 public class InfoFragments extends Fragment {
 
 
@@ -40,8 +42,6 @@ public class InfoFragments extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        PreferencesManager preferenceManager = new PreferencesManager(getActivity());
 
         Button sendButton = getView().findViewById(R.id.btDownload);
         sendButton.setOnClickListener(new View.OnClickListener() {

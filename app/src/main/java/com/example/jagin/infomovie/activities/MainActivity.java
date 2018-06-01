@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.example.jagin.infomovie.R;
-import com.example.jagin.infomovie.db.PreferencesManager;
 import com.example.jagin.infomovie.fragments.FavoritesFragments;
 import com.example.jagin.infomovie.fragments.PeliculasFragments;
 import com.example.jagin.infomovie.servicios.MediaService;
@@ -23,9 +22,6 @@ import com.example.jagin.infomovie.servicios.MediaService;
 public class MainActivity extends AppCompatActivity {
 
     private  static Activity mActivity;
-    private  boolean music=false;
-
-
 
     public  static Activity getmActivity() {
         return mActivity;
@@ -90,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
     {
         switch ( item.getItemId() )
         {
-            case R.id.action_info: Toast.makeText(this, "Information", Toast.LENGTH_SHORT).show();
+            case R.id.action_info:
                 Intent intent1 = new Intent();
                 intent1.setClass(this, InfoActivity.class);
                 startActivity(intent1);
                 return true;
 
-            case R.id.action_settings: Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+            case R.id.action_settings:
                 Intent intent2 = new Intent();
                 intent2.setClass(this, SettingsActivity.class);
                 startActivity(intent2);

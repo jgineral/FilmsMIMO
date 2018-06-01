@@ -69,12 +69,10 @@ public class SettingsFragments extends Fragment {
 
     private void setValueFalse() {
         preferenceManager.setMusicEnabled(false);
-        getActivity().stopService(new Intent(getActivity(), MediaService.class));
     }
 
     private void setValueTrue() {
         preferenceManager.setMusicEnabled(true);
-        getActivity().startService(new Intent(getActivity(), MediaService.class));
     }
 
 }

@@ -103,6 +103,7 @@ public class DetalleFragments extends Fragment {
         TextView tvDate = getView().findViewById(R.id.tvdate);
         TextView tvAdult = getView().findViewById(R.id.tvAdult);
         TextView tvOverview = getView().findViewById(R.id.tvOverview);
+        //tvOverview.setMovementMethod(new ScrollingMovementMethod());
         final ImageView ivFavorite = getView().findViewById(R.id.ivFavorite);
 
         ivFavorite.setOnClickListener(new View.OnClickListener() {

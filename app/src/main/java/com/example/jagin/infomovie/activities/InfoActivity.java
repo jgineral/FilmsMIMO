@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.fragments.InfoFragments;
 
+import java.util.Objects;
+
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class InfoActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Fragment infoFragments = InfoFragments.newInstance();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.fl_ContenedorInfo, infoFragments);
