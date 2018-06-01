@@ -4,25 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PeliculaActivity">
+    tools:context="com.example.jagin.infomovie.activities.SettingsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="MiMovies!"
-            app:subtitle="Movie"
-            android:elevation="4dp"
-            />
+            app:subtitle="@string/settingsSubtitle"
+            app:title="@string/app_name"
+            style="@style/ToolbarStyle" />
 
         <FrameLayout
-            android:id="@+id/fl_ContenedorDetalle"
+            android:id="@+id/fl_ContenedorSettings"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/navigation">
-
+            android:layout_height="match_parent">
         </FrameLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

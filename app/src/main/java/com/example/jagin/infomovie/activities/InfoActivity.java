@@ -2,36 +2,31 @@ package com.example.jagin.infomovie.activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.jagin.infomovie.R;
-import com.example.jagin.infomovie.fragments.DetalleFragments;
+import com.example.jagin.infomovie.fragments.InfoFragments;
 
-public class PeliculaActivity extends AppCompatActivity
-{
+
+public class InfoActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.contenido_pelicula);
-
+        setContentView(R.layout.activity_info);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        Fragment fragment = DetalleFragments.newInstance();
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fl_ContenedorDetalle, fragment);
-        //fragmentTransaction.addToBackStack("lista"); //Guardar el fragments
+        Fragment infoFragments = InfoFragments.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.fl_ContenedorInfo, infoFragments);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
 
     }
+
+
 }

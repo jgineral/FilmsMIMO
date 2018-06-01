@@ -30,10 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                tools:text="Pelicula Title" />
+                android:text="Pelicula Title"
+                style="@style/title" />
 
             <TextView
                 android:id="@+id/tvVote_average"
@@ -41,9 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
+                style="@style/title"
                 android:paddingBottom="30dp"
                 tools:text="9'5" />
 

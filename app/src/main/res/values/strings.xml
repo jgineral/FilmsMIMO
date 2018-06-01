@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InfoMovie</string>
+    <string name="app_name">MiMovies</string>
     <string name="error">Ups! un error</string>
     <string name="Home">home</string>
     <string name="Favoritos">favoritos</string>
@@ -9,9 +9,13 @@
     <string name="response_title">Response</string>
     <string name="adulto_true">Age: +18</string>
     <string name="favorito">Favorite</string>
-    <string name="no_favorite">Not favorite</string>
+    <string name="no_favorite">Not favourite</string>
     <string name="info">Info</string>
     <string name="music">Music</string>
     <string name="all_public">All public</string>
-    <string name="no_favoritos">You don\'t have favorite movies</string>
+    <string name="no_favoritos">You don\'t have favourite movies</string>
+    <string name="Settings">Settings</string>
+    <string name="informationSubtitle">Information</string>
+    <string name="settingsSubtitle">Settings</string>
+    <string name="soundSwichText">Enable/Disable sounds</string>
 </resources>

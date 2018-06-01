@@ -53,18 +53,6 @@ public class FavoritesFragments extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        rvFavoritos = Objects.requireNonNull(getView()).findViewById(R.id.rv_favoritos);
-        tvNoFavorites = getView().findViewById(R.id.tvInfoList);
-        rvFavoritos.setLayoutManager((new LinearLayoutManager(getActivity())));
-        rvFavoritos.setItemAnimator(new DefaultItemAnimator());
-        adapter = new PeliculaAdapter();
-        getFavoritePeliculas();
-        countFavoritesItems();
-        super.onResume();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         if(db!=null){

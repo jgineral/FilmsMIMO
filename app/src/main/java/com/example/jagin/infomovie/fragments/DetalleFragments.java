@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jagin.infomovie.BuildConfig;
-import com.example.jagin.infomovie.MainActivity;
+import com.example.jagin.infomovie.activities.MainActivity;
 import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.asyncTask.DeleteFavoriteTask;
 import com.example.jagin.infomovie.asyncTask.InsertFavoriteTask;
@@ -51,19 +51,9 @@ public class DetalleFragments extends Fragment {
         pelicula = getActivity().getIntent().getParcelableExtra("pelicula");
         posiblesCambios = false;
 
-        //desatacarFragment();
-
         favorite = pelicula.isFavorite();
 
         init(pelicula);
-
-
-    }
-
-
-    @Override
-    public void onStop() {
-        super.onStop();
 
 
     }
@@ -73,13 +63,12 @@ public class DetalleFragments extends Fragment {
         //Add o delete en onDestroy por si el usuario clickea redundantemente en el icono de favoritos.
         if(favorite){
             addToFavorites(pelicula);
-
         }
         else{
             deleteToFavorites(pelicula);
             Log.i("Deleted finalmente",pelicula.getTitle());
         }
-        //atacarFragment();
+        //Si ha interactuado con la estrella es posible que hubiera cambios en los Recycles, por tanto actualizar la vista.
         if(posiblesCambios) {
             reset();
         }
@@ -123,14 +112,14 @@ public class DetalleFragments extends Fragment {
                 if(favorite){
                     favorite = false;
                     //ivFavorite.setImageResource(R.drawable.star_off);
-                    Picasso.with(getActivity()).load(R.drawable.ic_star_border).into(ivFavorite);
+                    Picasso.with(getActivity()).load(R.drawable.star_off).resize(100,100).into(ivFavorite);
                     Snackbar.make(getView(),"Film deleted to favorites",Snackbar.LENGTH_LONG).show();
 
                 }
                 else{
                     favorite = true;
                     //ivFavorite.setImageResource(R.drawable.star_on);
-                    Picasso.with(getActivity()).load(R.drawable.ic_star).into(ivFavorite);
+                    Picasso.with(getActivity()).load(R.drawable.star_on).resize(100,100).into(ivFavorite);
                     Snackbar.make(getView(),"Film added to favorites",Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -145,11 +134,11 @@ public class DetalleFragments extends Fragment {
         tvAverage.setText(media_votos);
         tvDate.setText(pelicula.getRelease_date());
         if(pelicula.isFavorite()){
-            Picasso.with(getActivity()).load(R.drawable.ic_star).into(ivFavorite);
+            Picasso.with(getActivity()).load(R.drawable.star_on).resize(100,100).into(ivFavorite);
             //ivFavorite.setImageResource(R.drawable.ic_star);
         }
         else{
-            Picasso.with(getActivity()).load(R.drawable.ic_star_border).into(ivFavorite);
+            Picasso.with(getActivity()).load(R.drawable.star_off).resize(100,100).into(ivFavorite);
             //ivFavorite.setImageResource(R.drawable.ic_star_border);
         }
         if(pelicula.isAdult()){

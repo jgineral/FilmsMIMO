@@ -1,7 +1,8 @@
-package com.example.jagin.infomovie;
+package com.example.jagin.infomovie.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
@@ -12,13 +13,18 @@ import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.example.jagin.infomovie.R;
+import com.example.jagin.infomovie.db.PreferencesManager;
 import com.example.jagin.infomovie.fragments.FavoritesFragments;
 import com.example.jagin.infomovie.fragments.PeliculasFragments;
+import com.example.jagin.infomovie.servicios.MediaService;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private  static Activity mActivity;
+    private  boolean music=false;
+
 
 
     public  static Activity getmActivity() {
@@ -29,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //startService(new Intent(MainActivity.this, MediaService.class));
+
+
         mActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,12 +44,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(myOnNavigationItemSelectedListener);
         navigationView.setSelectedItemId(R.id.navigation_home);
-
-
-
-
-
-
     }
 
 
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectFragment(MenuItem item) {
         Fragment fragmentClicked = null;
-
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 fragmentClicked = PeliculasFragments.newInstance();
@@ -67,10 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClicked = FavoritesFragments.newInstance();
                 break;
         }
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fl_Contenedor, fragmentClicked);
-        //fragmentTransaction.addToBackStack("lista"); //Guardar el fragments
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().replace(R.id.fl_Contenedor, fragmentClicked);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
 
@@ -78,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        //stopService(new Intent(MainActivity.this, MediaService.class));
-        Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show();
+        stopService(new Intent(MainActivity.this, MediaService.class));
         super.onDestroy();
     }
 
@@ -90,7 +86,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch ( item.getItemId() )
+        {
+            case R.id.action_info: Toast.makeText(this, "Information", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent();
+                intent1.setClass(this, InfoActivity.class);
+                startActivity(intent1);
+                return true;
+
+            case R.id.action_settings: Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent();
+                intent2.setClass(this, SettingsActivity.class);
+                startActivity(intent2);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
+
 }
