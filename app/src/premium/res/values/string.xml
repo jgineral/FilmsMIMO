@@ -3,11 +3,6 @@
     <string name="ImgMIMO">Img Logo</string>
     <string name="AboutAndroid">About Android</string>
     <string name="descripcion_aplicacion_info">
-        MiMovie is an application created by the developers: Guillermo Sanchez González and Javier Giner Álvarez. \n\n
-        We study a master about mobile software development at Pontificial University of Salamanca. \n\n
-        This application is part of the Android course. With the premium version you can see more information about our training in Spanish \n\n
-        We love movies and we hope you like what we have developed.\n\n
-        The application shows the latest movies available in cinemas. Below you will find a current list. \n\n
-        For more information, you can download the following pdf:
+        MiMovie is an application created by the developers: Guillermo Sanchez González and Javier Giner Álvarez.\n\nWe study a master about mobile software development at Pontificial University of Salamanca.\n\nThis application is part of the Android course. With the premium version you can see more information about our training in Spanish\n\nWe love movies and we hope you like what we have developed.\nThe application shows the latest movies available in cinemas. Below you will find a current list.\n\nFor more information, you can download the following pdf:
     </string>
 </resources>

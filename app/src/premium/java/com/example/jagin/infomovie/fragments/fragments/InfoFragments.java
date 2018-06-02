@@ -1,6 +1,4 @@
-package com.example.jagin.infomovie;
-
-
+package com.example.jagin.infomovie.fragments.fragments;
 
 import android.Manifest;
 import android.app.DownloadManager;
@@ -20,11 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.db.PreferencesManager;
 import com.example.jagin.infomovie.servicios.MediaService;
 
 import java.util.Objects;
-
 
 public class InfoFragments extends Fragment {
 
@@ -121,3 +119,4 @@ public class InfoFragments extends Fragment {
         }
     }
 }
+

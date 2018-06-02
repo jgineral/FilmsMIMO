@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.example.jagin.infomovie.InfoFragments;
 import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.db.PreferencesManager;
+import com.example.jagin.infomovie.fragments.fragments.InfoFragments;
 import com.example.jagin.infomovie.servicios.MediaService;
 
 import java.util.Objects;

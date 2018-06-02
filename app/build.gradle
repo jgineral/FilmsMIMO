@@ -26,7 +26,7 @@ android {
             buildConfigField "String", "URL_IMG", "\"https://image.tmdb.org/t/p/w200\""
             buildConfigField "String", "URL_IMG_POSTER", "\"https://image.tmdb.org/t/p/w300\""
             buildConfigField "String", "DB_NAME", "\"favorites_movies\""
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
