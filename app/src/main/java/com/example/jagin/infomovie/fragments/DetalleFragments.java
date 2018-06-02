@@ -70,7 +70,7 @@ public class DetalleFragments extends Fragment {
         }
         //Si ha interactuado con la estrella es posible que hubiera cambios en los Recycles, por tanto actualizar la vista.
         if(posiblesCambios) {
-            reset();
+           reset();
         }
 
         super.onDestroy();

@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.fragments.FavoritesFragments;
@@ -36,6 +36,23 @@ public class MainActivity extends AppCompatActivity {
         mActivity = this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Recargar.
+                        swipeRefreshLayout.setRefreshing(false);
+                        Fragment fragmentToReset = getFragmentManager().findFragmentById(R.id.fl_Contenedor);
+                        FragmentTransaction fragTransaction =   getFragmentManager().beginTransaction();
+                        fragTransaction.detach(fragmentToReset).attach(fragmentToReset).commit();
+                    }
+                },2000);
+            }
+        });
 
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(myOnNavigationItemSelectedListener);

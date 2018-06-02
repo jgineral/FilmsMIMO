@@ -18,13 +18,16 @@
         style="@style/ToolbarStyle" />
 
 
-
-    <FrameLayout
-        android:id="@+id/fl_Contenedor"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
-
+        <FrameLayout
+            android:id="@+id/fl_Contenedor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:layout_width="wrap_content"

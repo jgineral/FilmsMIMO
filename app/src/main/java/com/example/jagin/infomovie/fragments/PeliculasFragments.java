@@ -37,8 +37,6 @@ public class PeliculasFragments extends Fragment {
         return new PeliculasFragments();
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_peliculas_fragments, container, false);
@@ -67,7 +65,6 @@ public class PeliculasFragments extends Fragment {
         }
 
     }
-
     //Obtenemos las Peliculas
     private void getPeliculas(){
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.URL, Results.class, null, new Response.Listener<Results>() {

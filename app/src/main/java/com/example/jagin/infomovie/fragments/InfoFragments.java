@@ -26,6 +26,7 @@ import com.example.jagin.infomovie.servicios.MediaService;
 
 import java.util.Objects;
 
+
 public class InfoFragments extends Fragment {
 
 
@@ -43,7 +44,7 @@ public class InfoFragments extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button sendButton = getView().findViewById(R.id.btDownload);
+        Button sendButton = Objects.requireNonNull(getView()).findViewById(R.id.btDownload);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

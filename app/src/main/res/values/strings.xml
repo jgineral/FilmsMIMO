@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MiMovies</string>
     <string name="error">Ups! un error</string>
-    <string name="Home">home</string>
-    <string name="Favoritos">favoritos</string>
+    <string name="Home">Home</string>
+    <string name="Favoritos">Favorites</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="response_title">Response</string>
     <string name="adulto_true">Age: +18</string>
@@ -23,4 +23,7 @@
     <string name="overview">Overview</string>
     <string name="descripcion_aplicacion_info">MiMovie is an application created by the developers: Guillermo Sanchez González and Javier Giner Álvarez. \nThe application shows the latest movies available in cinemas. You have a list of favorites to save movies that you love. \nFor more information about this application, you can download the following pdf:</string>
     <string name="download">Download:</string>
+    <string name="songTitle">Longing</string>
+    <string name="authorSong">Joakim Karud</string>
+    <string name="imagemovie">ImageMovie</string>
 </resources>

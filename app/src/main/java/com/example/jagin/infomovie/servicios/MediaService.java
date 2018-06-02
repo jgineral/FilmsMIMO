@@ -9,8 +9,9 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import com.example.jagin.infomovie.R;
 
+
 public class MediaService extends Service implements MediaPlayer.OnCompletionListener{
-    MediaPlayer m_mediaPlayer;
+    private  MediaPlayer m_mediaPlayer;
     private static final int NOTIFICATION_ID = 1;
 
     @Override
@@ -26,13 +27,8 @@ public class MediaService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Thread musicThread = new Thread(new Runnable() {
-            public void run() {
-                play_music();
-            }
-        });
-
-        musicThread.start();
+        MovieTask movieTask = new MovieTask();
+        movieTask.execute();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -67,14 +63,12 @@ public class MediaService extends Service implements MediaPlayer.OnCompletionLis
     private Notification getForegroundNotification() {
 
         Notification.Builder notif = new Notification.Builder(this)
-                .setContentTitle("Guerrera")
-                .setContentText("C. Tangana & Dellafuente")
+                .setContentTitle(getString(R.string.songTitle))
+                .setContentText(getString(R.string.authorSong))
                 .setSmallIcon(android.R.drawable.ic_media_play)
                 .setOngoing(true)
                 .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.ic_info))
                 .setStyle(new Notification.BigTextStyle());
-                //.setStyle(new Notification.BigPictureStyle()
-                //        .bigPicture(BitmapFactory.decodeResource(getApplicationContext().getResources(),R.drawable.song)));
 
         return notif.build();
 
@@ -83,6 +77,14 @@ public class MediaService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
         disableForegroundMode();
+    }
+
+    private  class MovieTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            play_music();
+            return null;
+        }
     }
 }
 

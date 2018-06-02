@@ -9,7 +9,7 @@
     </style>
 
     <style name="title">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/primary_text</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -70,10 +70,10 @@
     </style>
 
     <style name="ButtonWithTextIconStyle">
-        <item name="android:background">@android:color/white</item>
+        <item name="android:background">@color/primary_light</item>
         <item name="android:padding">2dp</item>
         <item name="android:layout_margin">10dp</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">@color/secondary_text</item>
         <item name="android:drawableEnd">@drawable/file_download</item>
     </style>
 
