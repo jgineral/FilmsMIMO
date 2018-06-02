@@ -1,4 +1,4 @@
-package com.example.jagin.infomovie.fragments;
+package com.example.jagin.infomovie;
 
 
 
@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.jagin.infomovie.R;
 import com.example.jagin.infomovie.db.PreferencesManager;
 import com.example.jagin.infomovie.servicios.MediaService;
 
@@ -28,7 +27,6 @@ import java.util.Objects;
 
 
 public class InfoFragments extends Fragment {
-
 
     public static InfoFragments newInstance(){
         return new InfoFragments();
@@ -45,6 +43,7 @@ public class InfoFragments extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         Button sendButton = Objects.requireNonNull(getView()).findViewById(R.id.btDownload);
+        Button sendButton2 = Objects.requireNonNull(getView()).findViewById(R.id.btDownloadPremium);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,13 +51,32 @@ public class InfoFragments extends Fragment {
             }
         });
 
+        sendButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadArchivePremium();
+            }
+        });
+
     }
 
     private void downloadArchive(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
                 downloadPdf();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        } else {
+            downloadPdf();
+        }
+    }
+    private void downloadArchivePremium(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                downloadPdfPremium();
             } else {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
@@ -80,6 +98,19 @@ public class InfoFragments extends Fragment {
             downloadManager.enqueue(request);
         }
     }
+    private void downloadPdfPremium()
+    {
+        Uri resource = Uri.parse("http://www.web.upsa.es/mimo/images/MasterMIMO.png");
+        DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(resource);
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
+        request.setTitle("Imagen");
+        request.setDestinationInExternalFilesDir(getActivity(), Environment.DIRECTORY_PICTURES, "MimoImagen.pdf");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        if (downloadManager != null) {
+            downloadManager.enqueue(request);
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,12 +119,5 @@ public class InfoFragments extends Fragment {
         if (preferencesManager.isMusicEnabled()) {
             getActivity().startService(new Intent(getActivity(), MediaService.class));
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().stopService(new Intent(getActivity(), MediaService.class));
-
     }
 }

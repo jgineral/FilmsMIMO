@@ -54,8 +54,7 @@ public class SettingsFragments extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                if(isChecked)
-                {
+                if(isChecked){
                     setValueTrue();
                 }else{
                     setValueFalse();
@@ -63,7 +62,6 @@ public class SettingsFragments extends Fragment {
 
             }
         });
-
 
     }
 

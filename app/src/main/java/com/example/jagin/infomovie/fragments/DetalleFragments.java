@@ -112,15 +112,13 @@ public class DetalleFragments extends Fragment {
                 posiblesCambios = true;
                 if(favorite){
                     favorite = false;
-                    //ivFavorite.setImageResource(R.drawable.star_off);
-                    Picasso.with(getActivity()).load(R.drawable.star_off).resize(100,100).into(ivFavorite);
+                    Picasso.with(getActivity()).load(R.drawable.star_off).resize(150,150).into(ivFavorite);
                     Snackbar.make(getView(),"Film deleted to favorites",Snackbar.LENGTH_LONG).show();
 
                 }
                 else{
                     favorite = true;
-                    //ivFavorite.setImageResource(R.drawable.star_on);
-                    Picasso.with(getActivity()).load(R.drawable.star_on).resize(100,100).into(ivFavorite);
+                    Picasso.with(getActivity()).load(R.drawable.star_on).resize(150,150).into(ivFavorite);
                     Snackbar.make(getView(),"Film added to favorites",Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -135,12 +133,10 @@ public class DetalleFragments extends Fragment {
         tvAverage.setText(media_votos);
         tvDate.setText(pelicula.getRelease_date());
         if(pelicula.isFavorite()){
-            Picasso.with(getActivity()).load(R.drawable.star_on).resize(100,100).into(ivFavorite);
-            //ivFavorite.setImageResource(R.drawable.ic_star);
+            ivFavorite.setImageResource(R.drawable.star_on);
         }
         else{
-            Picasso.with(getActivity()).load(R.drawable.star_off).resize(100,100).into(ivFavorite);
-            //ivFavorite.setImageResource(R.drawable.ic_star_border);
+            ivFavorite.setImageResource(R.drawable.star_off);
         }
         if(pelicula.isAdult()){
             tvAdult.setText(R.string.adulto_true);

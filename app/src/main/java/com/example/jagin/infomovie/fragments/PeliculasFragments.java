@@ -52,6 +52,7 @@ public class PeliculasFragments extends Fragment {
             rvPeliculas = getView().findViewById(R.id.rv_Peliculas);
             rvPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
             adapter = new PeliculaAdapter();
+            //Network
             getPeliculas();
 
         }
@@ -65,7 +66,7 @@ public class PeliculasFragments extends Fragment {
         }
 
     }
-    //Obtenemos las Peliculas
+    //Obtenemos las Peliculas. Network
     private void getPeliculas(){
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.URL, Results.class, null, new Response.Listener<Results>() {
 
@@ -74,7 +75,7 @@ public class PeliculasFragments extends Fragment {
                 if(peliculas != null){
                     peliculasList = peliculas.getPeliculas();
                     for (int i = 0; i < peliculasList.size(); i++) {
-                        //Comprobamos si hay alguna favorita para cambiar la favoritos en el recycler
+                        //Comprobamos si hay alguna favorita para cambiar el recycler de favoritos.
                         getFavoritePeliculaById(i);
                     }
                 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jagin.infomovie.activities.InfoActivity">
+
+    <TextView
+        android:id="@+id/tvPresentación"
+        android:text="@string/descripcion_aplicacion_info"
+        style="@style/PresentacionInfoStyle" />
+
+    <Button
+        android:id="@+id/btDownload"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Download: "
+        android:text="@string/download"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvPresentación"
+        style="@style/ButtonWithTextIconStyle" />
+
+</RelativeLayout>

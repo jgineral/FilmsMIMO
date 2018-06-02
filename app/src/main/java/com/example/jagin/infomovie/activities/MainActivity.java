@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         FragmentTransaction fragTransaction =   getFragmentManager().beginTransaction();
                         fragTransaction.detach(fragmentToReset).attach(fragmentToReset).commit();
                     }
-                },2000);
+                },1500);
             }
         });
 
