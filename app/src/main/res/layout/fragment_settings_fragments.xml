@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jagin.infomovie.activities.InfoActivity">
+    tools:context="com.mimo.jagin.infomovie.activities.InfoActivity">
 
     <Switch
         android:id="@+id/switch2"
